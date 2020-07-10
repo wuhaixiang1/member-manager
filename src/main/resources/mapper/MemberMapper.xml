@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.hai.mapper.MemberMapper">
+  <resultMap id="BaseResultMap" type="com.qianfeng.hai.domain.entity.Member">
+    <!--@mbg.generated-->
+    <!--@Table `member`-->
+    <id column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="power" jdbcType="VARCHAR" property="power" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+
+</mapper>

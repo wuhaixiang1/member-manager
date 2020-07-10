@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qianfeng.hai.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.qianfeng.hai.domain.entity.User">
+    <!--@mbg.generated-->
+    <!--@Table `user`-->
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="enter_time" jdbcType="TIMESTAMP" property="enterTime" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+
+  <select id="select" resultMap="BaseResultMap">
+    select * from user
+    <trim prefix="where" prefixOverrides="and|or">
+      <if test="date != null and keyword != null">
+        (user_name like concat('%',#{keyword},'%') or phone like concat('%',#{keyword},'%')
+        or email like concat('%',#{keyword},'%') )
+        and enter_time between concat(#{date},' 00:00:00') and concat(#{date}, ' 23:59:59')
+      </if>
+    </trim>
+    limit #{limit}, #{offset}
+  </select>
+
+  <update id="update">
+    update user
+    <trim prefix="set" suffixOverrides=",">
+      <if test="user.userName != null">user_name = #{user.userName},</if>
+      <if test="user.phone != null">phone = #{user.phone},</if>
+      <if test="user.email != null">email = #{user.email},</if>
+      <if test="user.address != null">address = #{user.address},</if>
+      <if test="user.grade != null">grade = #{user.grade},</if>
+      <if test="user.gender != null">gender = #{user.gender},</if>
+      <if test="user.status != null">status = #{user.status},</if>
+    </trim>
+    where user_id = #{user.userId}
+  </update>
+
+</mapper>
