@@ -8,4 +8,11 @@ public interface UserMapper {
     List<User> select(@Param("keyword") String keyword, @Param("date") String date, @Param("limit") int limit, @Param("offset") int offset);
 
     int update(@Param("user") User user);
+
+    User selectById(@Param("id") int id);
+
+    int delete(@Param("list") List<User> list);
+
+    int insert(@Param("user") User user);
+
 }

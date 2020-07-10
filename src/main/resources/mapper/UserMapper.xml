@@ -13,7 +13,9 @@
     <result column="enter_time" jdbcType="TIMESTAMP" property="enterTime" />
     <result column="grade" jdbcType="VARCHAR" property="grade" />
     <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="is_delete" javaType="INTEGER" property="isDelete"/>
   </resultMap>
+  <sql id="fields">user_id, user_name, phone, email, address, gender, enter_time, grade, status</sql>
 
   <select id="select" resultMap="BaseResultMap">
     select * from user
@@ -40,5 +42,39 @@
     </trim>
     where user_id = #{user.userId}
   </update>
+  <select id="selectById" resultMap="BaseResultMap">
+    select <include refid="fields"></include> from user where user_id = #{id}
+  </select>
+
+  <delete id="insert">
+    insert into user
+    <trim prefix="(" suffix=")"  suffixOverrides=",">
+      <if test="user.userName != null">user_name,</if>
+      <if test="user.phone != null">phone,</if>
+      <if test="user.email != null">email,</if>
+      <if test="user.address != null">address,</if>
+      <if test="user.grade != null">grade,</if>
+      <if test="user.gender != null">gender,</if>
+      <if test="user.status != null">status,</if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")"  suffixOverrides=",">
+      <if test="user.userName != null">#{user.userName},</if>
+      <if test="user.phone != null">#{user.phone},</if>
+      <if test="user.email != null">#{user.email},</if>
+      <if test="user.address != null">#{user.address},</if>
+      <if test="user.grade != null">#{user.grade},</if>
+      <if test="user.gender != null">#{user.gender},</if>
+      <if test="user.status != null">#{user.status},</if>
+    </trim>
+  </delete>
+
+  <delete id="delete">
+    update user set status = '删除' where user_id  in
+       <foreach collection="list" item="li" separator="," open="(" close=")">
+         #{li}
+       </foreach>
+    and is_delete = 0;
+  </delete>
 
 </mapper>

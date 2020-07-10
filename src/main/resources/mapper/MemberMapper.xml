@@ -9,5 +9,17 @@
     <result column="power" jdbcType="VARCHAR" property="power" />
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
+    <update id="update">
+      update member
+      <trim prefix="set" suffixOverrides=",">
+        <if test="member.grade != null and member.grade != ''">grade = #{member.grade},</if>
+        <if test="member.power != null and member.power != ''">power = #{member.power},</if>
+        <if test="member.status != null">status = #{member.status}</if>
+      </trim>
+      where member_id = #{member.memberId}
+    </update>
+  <select id="selectById" resultMap="BaseResultMap">
+    select member_id, grade, power, status from member where member_id = #{id}
+  </select>
 
 </mapper>
