@@ -41,4 +41,14 @@ public class UserManagerController {
     public Result<Integer> addUser(UserDto userDto) {
         return null;
     }
+
+
+
+
+
+    @PostMapping("/update")
+    public Result<UserDto> updateByUserId33(UserDto userDto) throws ControllerException {
+        UserDto userDto1 = userService.updateByUserId(userDto);
+        return Result.success(userDto1);
+    }
 }

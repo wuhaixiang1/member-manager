@@ -8,4 +8,5 @@ public interface MemberMapper {
 
     Member selectById(@Param("id") int id);
 
+
 }
