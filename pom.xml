@@ -22,7 +22,7 @@
     <mybatis-spring.varsion>2.0.5</mybatis-spring.varsion>
     <mysql.varsion>8.0.20</mysql.varsion>
     <druid.version>1.1.23</druid.version>
-    <jacksion.version>2.11.1</jacksion.version>
+    <jacksion.version>2.12.7.1</jacksion.version>
     <lombok.version>1.18.12</lombok.version>
   </properties>
 
